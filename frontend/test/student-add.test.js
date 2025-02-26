@@ -2,7 +2,7 @@ import { Selector, ClientFunction } from 'testcafe';
 process.env.NODE_ENV = "test";
 
 fixture`Testing Student UI`
-    .page`http://localhost:4401/addStudent`
+    .page`http://localhost:4401/student`
     .beforeEach(async t => {
         await t.setTestSpeed(0.75); // Slows down the test a bit to avoid race conditions
         await t.setPageLoadTimeout(10000); // Increase timeout (default is 3000ms)
