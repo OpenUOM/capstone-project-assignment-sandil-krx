@@ -47,6 +47,8 @@ export class TeacherTableComponent implements OnInit {
     this.selected = 'Teachers';
     this.service.getTeacherData().subscribe((response) => {
       this.teacherData = Object.keys(response).map((key) => [response[key]]);
+      this.filteredTeacherData = [...this.filteredTeacherData]
+      
     }, (error) => {
       console.log('ERROR - ', error)
     })
@@ -61,24 +63,18 @@ export class TeacherTableComponent implements OnInit {
     })
   }
 
-  search(value) {
-    let foundItems = [];
-    if (value.length <= 0) {
-      this.getTeacherData();
-    } else {
-      /*
-      let b = this.teacherData.filter((teacher) => {
-        if (teacher[0].name.toLowerCase().indexOf(value) > -1) {
-          foundItems.push(teacher)
-        }
-      });
-      */
-     this.filteredTeacherData = this.teacherData.filter((teacher) => {
-      teacher.name.toLowerCase().includes(value.toLowerCase())
-     })
-      this.filteredTeacherData = foundItems;
+  search(value: string) {
+    if (!value.trim()) {
+      this.filteredTeacherData = [...this.teacherData]; // Reset to full list if input is empty
+      return;
     }
+  
+    this.filteredTeacherData = this.teacherData.filter((teacher) =>
+      teacher[0].name.toLowerCase().includes(value.toLowerCase())
+    );
+    this.getTeacherData();
   }
+  
 
   deleteTeacher(itemid) {
     const test = {

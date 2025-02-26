@@ -14,7 +14,7 @@
       <th style="width: 50px;"></th>
       <th style="width: 50px;"></th>
     </tr>
-    <tr *ngFor="let teacher of teacherData">
+    <tr *ngFor="let teacher of filteredTeacherData">
       <td>{{teacher[0].name}}</td>
       <td>{{teacher[0].id}}</td>
       <td>{{2022 - teacher[0].age}}</td>
